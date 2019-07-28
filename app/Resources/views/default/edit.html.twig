@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %} 
+{% block title %} 
+<title>Addressbook - Edit Contact</title>
+{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block body %}
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+<div class="clearfix"></div>
+<div class="page-container" style="overflow: hidden;">
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <div class="page-head">
+            <div class="page-title">
+               <h1>Addressbook &raquo; Contacts</h1>
+            </div>
+         </div>
+         <ul class="page-breadcrumb breadcrumb">
+            <li><a href="{{ app.request.getSchemeAndHttpHost() }}" title="Go Back Home">Home</a></li>
+            <li><span class="active">Edit Contact</span></li>
+         </ul>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="portlet light portlet-fit portlet-datatable bordered ">
+                  <div class="portlet-title">
+                     <div class="caption">
+                        <i class="fa fa-list font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase"> Edit Contact </span>
+                     </div>
+                  </div>
+                  <div class="portlet-body">
+                     {{ form_start(ContactInfo,{'attr':{'class':'form-horizontal','id':'frmcontact','data-toggle':'validator'}}) }}
+                     <div class="form-group">
+                        <label class="control-label col-md-3">First Name<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.firstName, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter First Name', 'maxlength': '50', 'tabindex': '1'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Last Name<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.lastName, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Last Name', 'maxlength': '50', 'tabindex': '2'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Street Number<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.streetNumber, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Street Number', 'maxlength': '50', 'tabindex': '3'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Street Name<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.street, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Street Name', 'maxlength': '200', 'tabindex': '4'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Zipcode<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.zipcode, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Zipcode', 'maxlength': '10', 'tabindex': '5'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">City<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.city, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter City', 'maxlength': '100', 'tabindex': '6'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Country<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.country, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Country', 'maxlength': '200', 'tabindex': '7'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Phone Number<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.phoneNumber, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Phone', 'maxlength': '25', 'tabindex': '8'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Birth Date<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.birthDate, { 'attr': { 'class': 'form-control datepicker', 'placeholder': 'Select Birth Date', 'maxlength': '10', 'tabindex': '9'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Email Address<span class="required"> * </span></label>
+                        <div class="col-md-8">
+                           {{ form_widget(ContactInfo.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Enter Email Address', 'maxlength': '200', 'tabindex': '10'} }) }}
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Picture</label>
+                        <div class="col-md-6">
+                           {{ form_widget(ContactInfo.profilePicture, { 'attr': { 'class': 'form-control', 'placeholder': 'Select Profile Picture', 'maxlength': '255', 'tabindex': '11', 'value': ''} }) }}
+                        </div>
+                        {% if contact.profilePicture is defined and contact.profilePicture is not empty %}
+                        <div class="col-md-3">
+                           <a class="fancybox" href="{{ app.request.getSchemeAndHttpHost() }}/assets/uploads/{{contact.profilePicture}}" title="{{contact.firstName}} {{contact.lastName}}"><img src="{{ app.request.getSchemeAndHttpHost() }}/assets/uploads/{{contact.profilePicture}}" alt="{{contact.firstName}} {{contact.lastName}}" title="{{contact.firstName}} {{contact.lastName}}" class="img-responsive" width="50" /></a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <div class="form-actions">
+                        <div class="row">
+                           <div class="col-md-offset-3 col-md-8">
+                              <button type="submit" class="btn green" name="frmSubmit" id="frmSubmit" tabindex="11"  title="Submit Contact Detail">Submit</button>
+                              <a href="{{ app.request.getSchemeAndHttpHost() }}" type="button" class="btn default" tabindex="12" title="Cancel">Cancel</a>
+                           </div>
+                        </div>
+                     </div>
+                     {{ form_end(ContactInfo) }}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %} 
+{% block javascripts %}
+<script src="{{ asset('assets/global/js/app.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/global/js/layout.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/global/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/contacts.js') }}" type="text/javascript"></script>
+{% endblock %}
